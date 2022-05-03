@@ -145,6 +145,8 @@ void task_PWR(void *argument) {
 
 			  } break ;
 			  case VERY_LONG_PRESS :   {
+				  m365_to_display.beep=1;
+					VescToSTM_set_ADC1(0);
 
 			  } break ;
 			  case DOUBLE_PRESS : {
