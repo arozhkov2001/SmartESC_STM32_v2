@@ -115,7 +115,7 @@ void PWR_set_shutdown_time(uint32_t seconds){
 void task_PWR(void *argument) {
 	static uint8_t main_loop_counter = 0;
 	static uint32_t shutdown_timer = 0;
-
+	static uint16_t AWD=0;
 
 	if(SpeednTorqCtrlM1.SPD->hAvrMecSpeedUnit){
 		shutdown_timer = 0;
@@ -146,8 +146,11 @@ void task_PWR(void *argument) {
 			  } break ;
 			  case VERY_LONG_PRESS :   {
 				  m365_to_display.beep=1;
+				  if(AWD==1){
 					VescToSTM_set_ADC1(0);
-
+					AWD=0;
+				  }
+				  AWD++;
 			  } break ;
 			  case DOUBLE_PRESS : {
 				  uint32_t kmh=0;
